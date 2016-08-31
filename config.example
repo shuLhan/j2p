@@ -1,0 +1,35 @@
+{
+	"jira": {
+		"url": "https://your.atlassian.net/"
+	,	"user": "atlassianusername"
+	,	"pass": "atlassionpassword"
+	,	"search_opt": {
+			"start_at": 0
+		,	"max_results": 5000
+		}
+	}
+,	"phabricator": {
+		"url": "http://phabricator.localdomain:10010/"
+	,	"token": "api-pcbhtiluxuarqcvg44a4vfkyikw5"
+	}
+,	"prioritiesMap": {
+		"Highest": 90
+	,	"High": 80
+	,	"Medium": 50
+	,	"Low": 25
+	,	"Lowest": 0
+	,	"Pending": 0
+	}
+,	"statusesMap": {
+		"Open": "open"
+	,	"In Progress": "open"
+	,	"Reopened": "open"
+	,	"Resolved": "resolved"
+	,	"Closed": "resolved"
+	,	"Building": "open"
+	,	"Build Broken": "open"
+	,	"To Do": "open"
+	,	"Testable": "resolved"
+	,	"Done": "resolved"
+	}
+}
