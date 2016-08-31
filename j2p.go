@@ -14,10 +14,10 @@ import (
 )
 
 //
-// J2PArgs contain command parameter passed by user. This will define what kind
+// Args contain command parameter passed by user. This will define what kind
 // of object that will be migrated to Phabricator.
 //
-type J2PArgs struct {
+type Args struct {
 	Job string
 }
 
@@ -29,7 +29,7 @@ type Cmd struct {
 	Config      *Config
 	JiraCl      *jira.Client
 	GonduitCl   *gonduit.Client
-	Args        J2PArgs
+	Args        Args
 	gonProjects []gonduit.Project
 }
 

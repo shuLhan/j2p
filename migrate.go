@@ -59,7 +59,7 @@ func (cmd *Cmd) MigrateProjects() (e error) {
 
 		// 2.3
 		if len(matchedProjects) == 0 {
-			fmt.Printf("[j2p] MigrateProjects << ",
+			fmt.Printf("[j2p] MigrateProjects << "+
 				"No project name matched with '%s'",
 				project.Name)
 			continue

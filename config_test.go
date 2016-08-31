@@ -14,7 +14,11 @@ import (
 func TestNewConfig(t *testing.T) {
 	cmd := j2p.Cmd{}
 
-	cmd.NewConfig()
+	e := cmd.NewConfig()
+
+	if e != nil {
+		t.Fatal(e)
+	}
 
 	fmt.Printf("CONFIG >> %+v\n", cmd.Config)
 }
