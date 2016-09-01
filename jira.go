@@ -26,7 +26,7 @@ func NewJiraClient(cfg *Config) (jiraCl *jira.Client, e error) {
 	var res bool
 
 	if DEBUG >= 1 {
-		fmt.Printf("[j2p] NewJiraClient> %s:%s@%s\n", cfg.Jira.User,
+		fmt.Printf("[j2p] NewJiraClient >> %s:%s@%s\n", cfg.Jira.User,
 			cfg.Jira.Pass, cfg.Jira.URL)
 	}
 
@@ -47,7 +47,8 @@ func NewJiraClient(cfg *Config) (jiraCl *jira.Client, e error) {
 }
 
 //
-// JiraGetProjects will query all project in JIRA and return it.
+// JiraGetProjects will query all project in JIRA filtered by command parameters
+// `-projects` and return it.
 //
 func (cmd *Cmd) JiraGetProjects() (
 	jiraProjects *[]jira.Project,
@@ -55,17 +56,34 @@ func (cmd *Cmd) JiraGetProjects() (
 ) {
 	req, _ := cmd.JiraCl.NewRequest("GET", JiraAPIProject, nil)
 
-	jiraProjects = new([]jira.Project)
+	allProjects := new([]jira.Project)
 
-	_, e = cmd.JiraCl.Do(req, jiraProjects)
+	_, e = cmd.JiraCl.Do(req, allProjects)
 	if e != nil {
 		return nil, e
 	}
 
-	for x, project := range *jiraProjects {
-		if DEBUG >= 2 {
-			fmt.Printf("[j2p] JiraGetProjects %d> %s: %s\n", x, project.Key,
-				project.Name)
+	if len(cmd.Args.Projects) == 0 {
+		jiraProjects = allProjects
+		goto out
+	}
+
+	jiraProjects = new([]jira.Project)
+
+	for _, v := range cmd.Args.Projects {
+		for _, project := range *allProjects {
+			if project.Name == v {
+				*jiraProjects = append(*jiraProjects, project)
+				break
+			}
+		}
+	}
+
+out:
+	if DEBUG >= 2 {
+		for x, project := range *jiraProjects {
+			fmt.Printf("[j2p] JiraGetProjects %d >> %s: %s\n", x,
+				project.Key, project.Name)
 		}
 	}
 

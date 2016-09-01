@@ -13,23 +13,38 @@ import (
 	"github.com/shuLhan/j2p"
 )
 
-func usage() {
-	fmt.Println(`
-Usage: j2p [job]
+const cmdUsage = `
+Usage: j2p [--projects="Project A,Project B, ..."] <job>
 
 job is one of this,
 
 	tasks
 		migrate JIRA tasks from all projects to Phabricator by creating
 		new project and new Maniphest task.
-`)
+
+`
+
+var cmd j2p.Cmd
+
+func init() {
+	flag.Var(&cmd.Args.Projects, "projects",
+		"List of project to be migrated, separated by comma.")
 }
 
 //
-// parseArgs will parse user arguments from command line.
+// usage will print this command usage to standard output.
 //
-func parseArgs(cmd *j2p.Cmd) error {
-	flag.Parse()
+func usage() {
+	fmt.Println(cmdUsage)
+}
+
+//
+// ParseArgs will parse user arguments from command line.
+//
+func ParseArgs() error {
+	if j2p.DEBUG >= 2 {
+		fmt.Printf("[j2p] Args: %s\n", cmd.Args)
+	}
 
 	cmd.Args.Job = flag.Arg(0)
 
@@ -41,10 +56,9 @@ func parseArgs(cmd *j2p.Cmd) error {
 }
 
 func main() {
-	var e error
-	var cmd j2p.Cmd
+	flag.Parse()
 
-	e = parseArgs(&cmd)
+	e := ParseArgs()
 	if e != nil {
 		usage()
 		os.Exit(1)
@@ -62,5 +76,4 @@ func main() {
 			panic(e)
 		}
 	}
-
 }

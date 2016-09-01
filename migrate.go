@@ -177,9 +177,6 @@ func (cmd *Cmd) MigrateTasks() (e error) {
 		if project.GetPhid() == "" {
 			continue
 		}
-		if project.GetName() != "Proofn Dev/Ops" {
-			continue
-		}
 
 		q = fmt.Sprintf(JiraQIssueAll, project.GetName())
 

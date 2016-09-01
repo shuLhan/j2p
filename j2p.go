@@ -18,7 +18,8 @@ import (
 // of object that will be migrated to Phabricator.
 //
 type Args struct {
-	Job string
+	Job      string
+	Projects ProjectFlags
 }
 
 //
