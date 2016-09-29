@@ -31,8 +31,9 @@ type ConfigJira struct {
 // ConfigPhabricator contains information of Phabricator server.
 //
 type ConfigPhabricator struct {
-	URL   string `json:"url"`
-	Token string `json:"token"`
+	URL    string `json:"url"`
+	Token  string `json:"token"`
+	Secure bool   `json:"secure"`
 }
 
 //

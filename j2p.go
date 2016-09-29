@@ -70,7 +70,7 @@ func (cmd *Cmd) Init() (e error) {
 
 	// (3)
 	cmd.GonduitCl = gonduit.NewClient(cmd.Config.Phab.URL,
-		cmd.Config.Phab.Token)
+		cmd.Config.Phab.Token, cmd.Config.Phab.Secure)
 
 	return nil
 }

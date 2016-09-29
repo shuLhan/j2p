@@ -11,6 +11,7 @@
 ,	"phabricator": {
 		"url": "http://phabricator.localdomain:10010/"
 	,	"token": "api-pcbhtiluxuarqcvg44a4vfkyikw5"
+	,	"secure": false
 	}
 ,	"prioritiesMap": {
 		"Highest": 90
