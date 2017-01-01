@@ -5,6 +5,10 @@
 
 `j2p` is a tool to help migrating from JIRA to Phabricator.
 
+NOTE: due to limited resources on testing (time and JIRA server for testing)
+this repository does not accept any reporting issue anymore on Github.
+
+
 ## Installation
 
 * Get the repository
